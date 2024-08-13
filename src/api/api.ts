@@ -1,4 +1,5 @@
 import PeopleResponse from "../types/PeopleResponse";
+import Person from "../types/Person";
 
 import { apiClient } from "./apiClient";
 
@@ -25,5 +26,5 @@ export async function getPersonById(id: string | number) {
     `https://sw-api.starnavi.io/people/${id}`
   );
 
-  return response.data as PeopleResponse;
+  return response.data as Person;
 }
