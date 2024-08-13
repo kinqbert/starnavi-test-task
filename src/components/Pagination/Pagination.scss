@@ -1,0 +1,58 @@
+@import "../../styles/colors.scss";
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+
+  &__direction-button {
+    width: 32px;
+    height: 32px;
+
+    background-color: $button-bg;
+
+    color: $button-text;
+    border-radius: 4px;
+    border: none;
+
+    &--disabled {
+      background-color: red; // todo -- pick better color
+    }
+
+    &:hover {
+      background-color: $button-bg--hover;
+    }
+  }
+
+  &__items {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__item {
+    width: 32px;
+    height: 32px;
+
+    color: $button-text;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $button-bg;
+
+    border-radius: 4px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    &--active {
+      background-color: green; // todo -- select better color
+    }
+
+    &:hover {
+      background-color: $button-bg--hover;
+    }
+  }
+}
