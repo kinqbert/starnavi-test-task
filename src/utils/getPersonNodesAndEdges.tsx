@@ -4,6 +4,7 @@ import Person from "../types/Person";
 
 import { getFilmById, getStarshipById } from "../api/api";
 import Film from "../types/Film";
+import Starship from "../types/Starship";
 
 export default async function getPersonNodesAndEdges(
   person: Person
@@ -66,19 +67,27 @@ export default async function getPersonNodesAndEdges(
     let currentStarshipNodeVerticalPosition =
       filmNode.position.y + STARSHIP_NODES_VERTICAL_OFFSET;
 
-    for (const starshipId of film.starships) {
-      const starship = await getStarshipById(starshipId);
+    const filmStarships: Starship[] = await Promise.all(
+      film.starships.map(async (starshipId) => getStarshipById(starshipId))
+    );
 
-      const starshipNode: Node = {
-        id: `starship-${starshipId}`,
-        data: { label: starship.name },
-        position: {
-          x: filmNode.position.x,
-          y: currentStarshipNodeVerticalPosition,
-        },
-        height: NODE_HEIGHT,
-        width: NODE_WIDTH,
-      };
+    for (const starship of filmStarships) {
+      if (starship) {
+        const starshipNode: Node = {
+          id: `starship-${starship.id}`,
+          data: { label: starship.name },
+          position: {
+            x: filmNode.position.x,
+            y: currentStarshipNodeVerticalPosition,
+          },
+          height: NODE_HEIGHT,
+          width: NODE_WIDTH,
+        };
+
+        nodes.push(starshipNode);
+
+        currentStarshipNodeVerticalPosition += STARSHIP_NODES_VERTICAL_OFFSET;
+      }
 
       // const starshipEdge: Edge = {
       //   id: `edge-${filmNode.id}-${starshipNode.id}`,
@@ -86,10 +95,7 @@ export default async function getPersonNodesAndEdges(
       //   target: starshipNode.id,
       // };
 
-      nodes.push(starshipNode);
       // edges.push(starshipEdge);
-
-      currentStarshipNodeVerticalPosition += STARSHIP_NODES_VERTICAL_OFFSET;
     }
 
     currentFilmNodeHorizontalPosition += FILM_NODES_HORIZONTAL_OFFSET;

@@ -1,4 +1,5 @@
 export default interface Starship {
+  id: number;
   name: string;
   model: string;
   starship_class: string;
