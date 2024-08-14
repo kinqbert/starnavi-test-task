@@ -1,9 +1,9 @@
 import PeopleResponse from "../types/PeopleResponse";
 import Person from "../types/Person";
 import Film from "../types/Film";
+import Starship from "../types/Starship";
 
 import { apiClient } from "./apiClient";
-import Starship from "../types/Starship";
 
 export async function getPeopleByAddress(address: string) {
   if (address) {
@@ -37,10 +37,6 @@ export async function getFilmById(id: string | number) {
   );
 
   return response.data as Film;
-
-  // const response = await apiClient.get("/api/films.json");
-  // 
-  // return response.data.find((film: Film) => film.episode_id === id);
 }
 
 export async function getStarshipById(id: string | number) {

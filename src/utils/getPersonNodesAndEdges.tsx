@@ -91,7 +91,7 @@ export default async function getPersonNodesAndEdges(
       nodes.push(starshipNode);
       edges.push(starshipEdge);
 
-      currentStarshipNodeVerticalPosition += STARSHIP_NODES_VERTICAL_OFFSET;
+      // currentStarshipNodeVerticalPosition += STARSHIP_NODES_VERTICAL_OFFSET;
     }
 
     currentFilmNodeHorizontalPosition += FILM_NODES_HORIZONTAL_OFFSET;
