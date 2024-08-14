@@ -1,5 +1,6 @@
 import PeopleResponse from "../types/PeopleResponse";
 import Person from "../types/Person";
+import Film from "../types/Film";
 
 import { apiClient } from "./apiClient";
 
@@ -27,4 +28,16 @@ export async function getPersonById(id: string | number) {
   );
 
   return response.data as Person;
+}
+
+export async function getFilmById(id: string | number) {
+  // const response = await apiClient.get(
+  //   `https://sw-api.starnavi.io/films/${id}`
+  // );
+
+  const response = await apiClient.get(
+    "/api/films.json"
+  );
+
+  return response.data.find((film: Film) => film.episode_id === id);
 }

@@ -1,0 +1,18 @@
+.person-page {
+  padding-top: 30px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    column-gap: 20px;
+  }
+
+  &__title {
+    text-align: left;
+  }
+
+  &__graph-wrapper {
+    height: 500px;
+    border: 1px solid black; // TODO -- pick better color
+  }
+}
