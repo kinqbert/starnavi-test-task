@@ -17,8 +17,8 @@ export default async function getPersonNodesAndEdges(
   const STARSHIP_NODES_HORIZONTAL_GAP = 30;
   const STARSHIP_NODES_FIRST_VERTICAL_OFFSET =
     NODE_HEIGHT + STARSHIP_NODES_HORIZONTAL_GAP + 20;
-  const STARSHIP_NODES_VERTICAL_OFFSET =
-    NODE_HEIGHT + STARSHIP_NODES_HORIZONTAL_GAP;
+  // const STARSHIP_NODES_VERTICAL_OFFSET =
+  //   NODE_HEIGHT + STARSHIP_NODES_HORIZONTAL_GAP;
 
   const nodes: Node[] = [];
   const edges: Edge[] = [];
@@ -65,7 +65,7 @@ export default async function getPersonNodesAndEdges(
     nodes.push(filmNode);
     edges.push(filmEdge);
 
-    let currentStarshipNodeVerticalPosition =
+    const currentStarshipNodeVerticalPosition =
       filmNode.position.y + STARSHIP_NODES_FIRST_VERTICAL_OFFSET;
 
     for (const starshipId of film.starships) {
