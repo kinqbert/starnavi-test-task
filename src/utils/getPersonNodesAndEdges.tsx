@@ -75,21 +75,21 @@ export default async function getPersonNodesAndEdges(
         id: `starship-${starshipId}`,
         data: { label: starship.name },
         position: {
-          x: currentFilmNodeHorizontalPosition,
+          x: filmNode.position.x,
           y: currentStarshipNodeVerticalPosition,
         },
         height: NODE_HEIGHT,
         width: NODE_WIDTH,
       };
 
-      const starshipEdge: Edge = {
-        id: `edge-${filmNode.id}-${starshipNode.id}`,
-        source: filmNode.id,
-        target: starshipNode.id,
-      };
+      // const starshipEdge: Edge = {
+      //   id: `edge-${filmNode.id}-${starshipNode.id}`,
+      //   source: filmNode.id,
+      //   target: starshipNode.id,
+      // };
 
       nodes.push(starshipNode);
-      edges.push(starshipEdge);
+      // edges.push(starshipEdge);
 
       // currentStarshipNodeVerticalPosition += STARSHIP_NODES_VERTICAL_OFFSET;
     }
