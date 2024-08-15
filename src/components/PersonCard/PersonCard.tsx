@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Person from "../../types/Person";
 
-import getPersonProps from "../../utils/getPersonProps";
+import { getPersonProps } from "../../utils/getProps";
 
 import "./PersonCard.scss";
 
@@ -27,9 +27,7 @@ export default function PersonCard({ person }: Props) {
         ))}
       </ul>
       <Link to={`/person/${person.id}`}>
-        <button className="person-card__button">
-          View Profile
-        </button>
+        <button className="person-card__button">View Profile</button>
       </Link>
     </div>
   );

@@ -7,27 +7,21 @@ import {
   Node,
   ReactFlow,
   ReactFlowProvider,
-  useReactFlow, // Import the hook
+  useReactFlow,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import { PuffLoader } from "react-spinners";
 
 import { getPersonById } from "../../api/api";
+
+import { nodeTypes } from "../../constants/nodeTypes";
 
 import Person from "../../types/Person";
 
 import getPersonNodesAndEdges from "../../utils/getPersonNodesAndEdges";
-import getPersonProps from "../../utils/getPersonProps";
+import { getPersonProps } from "../../utils/getProps";
 
 import "./PersonPage.scss";
-import { PuffLoader } from "react-spinners";
-
-export default function PersonPage() {
-  return (
-    <ReactFlowProvider>
-      <PersonPageChild />
-    </ReactFlowProvider>
-  );
-}
 
 function PersonPageChild() {
   const { id: personId } = useParams();
@@ -116,7 +110,12 @@ function PersonPageChild() {
                 <PuffLoader />
               </div>
             ) : (
-              <ReactFlow nodes={nodes} edges={edges} fitView>
+              <ReactFlow
+                nodes={nodes}
+                edges={edges}
+                nodeTypes={nodeTypes}
+                fitView
+              >
                 <Background
                   variant={BackgroundVariant.Dots}
                   gap={12}
@@ -128,5 +127,14 @@ function PersonPageChild() {
         </div>
       </div>
     </div>
+  );
+}
+
+// This additional wrapper is needed to make it possible to use React Flow hook inside component
+export default function PersonPage() {
+  return (
+    <ReactFlowProvider>
+      <PersonPageChild />
+    </ReactFlowProvider>
   );
 }

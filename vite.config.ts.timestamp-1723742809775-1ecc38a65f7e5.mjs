@@ -1,0 +1,13 @@
+// vite.config.ts
+import { defineConfig } from "file:///D:/Projects/test-tasks/starnavi-test-task/node_modules/vite/dist/node/index.js";
+import react from "file:///D:/Projects/test-tasks/starnavi-test-task/node_modules/@vitejs/plugin-react/dist/index.mjs";
+var vite_config_default = defineConfig(({ mode }) => {
+  return {
+    plugins: [react()],
+    base: mode === "production" ? "/starnavi-test-task/" : "/"
+  };
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcudHMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJEOlxcXFxQcm9qZWN0c1xcXFx0ZXN0LXRhc2tzXFxcXHN0YXJuYXZpLXRlc3QtdGFza1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiRDpcXFxcUHJvamVjdHNcXFxcdGVzdC10YXNrc1xcXFxzdGFybmF2aS10ZXN0LXRhc2tcXFxcdml0ZS5jb25maWcudHNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL0Q6L1Byb2plY3RzL3Rlc3QtdGFza3Mvc3Rhcm5hdmktdGVzdC10YXNrL3ZpdGUuY29uZmlnLnRzXCI7aW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSBcInZpdGVcIjtcbmltcG9ydCByZWFjdCBmcm9tIFwiQHZpdGVqcy9wbHVnaW4tcmVhY3RcIjtcblxuLy8gaHR0cHM6Ly92aXRlanMuZGV2L2NvbmZpZy9cbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZygoeyBtb2RlIH0pID0+IHtcbiAgcmV0dXJuIHtcbiAgICBwbHVnaW5zOiBbcmVhY3QoKV0sXG4gICAgYmFzZTogbW9kZSA9PT0gXCJwcm9kdWN0aW9uXCIgPyBcIi9zdGFybmF2aS10ZXN0LXRhc2svXCIgOiBcIi9cIixcbiAgfTtcbn0pO1xuIl0sCiAgIm1hcHBpbmdzIjogIjtBQUFxVCxTQUFTLG9CQUFvQjtBQUNsVixPQUFPLFdBQVc7QUFHbEIsSUFBTyxzQkFBUSxhQUFhLENBQUMsRUFBRSxLQUFLLE1BQU07QUFDeEMsU0FBTztBQUFBLElBQ0wsU0FBUyxDQUFDLE1BQU0sQ0FBQztBQUFBLElBQ2pCLE1BQU0sU0FBUyxlQUFlLHlCQUF5QjtBQUFBLEVBQ3pEO0FBQ0YsQ0FBQzsiLAogICJuYW1lcyI6IFtdCn0K

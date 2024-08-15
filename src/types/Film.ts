@@ -1,4 +1,5 @@
 export default interface Film {
+  id: number;
   characters: number[];
   created: Date;
   director: string;

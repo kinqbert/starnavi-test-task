@@ -11,15 +11,14 @@ import Starship from "../types/Starship";
 export default async function getPersonNodesAndEdges(
   person: Person
 ): Promise<[Node[], Edge[]]> {
-  const NODE_HEIGHT = 36;
   const NODE_WIDTH = 150;
 
-  const FILM_NODES_HORIZONTAL_GAP = 50;
+  const FILM_NODES_VERTICAL_OFFSET = 200;
+  const FILM_NODES_HORIZONTAL_GAP = 80;
   const FILM_NODES_HORIZONTAL_OFFSET = NODE_WIDTH + FILM_NODES_HORIZONTAL_GAP;
 
-  const STARSHIP_NODES_VERTICAL_GAP = 30;
-  const STARSHIP_NODES_VERTICAL_OFFSET =
-    NODE_HEIGHT + STARSHIP_NODES_VERTICAL_GAP;
+  const STARSHIP_NODES_VERTICAL_GAP = 50;
+  const STARSHIP_NODES_VERTICAL_OFFSET = STARSHIP_NODES_VERTICAL_GAP; // TODO -- check if correct
 
   const nodes: Node[] = [];
   const edges: Edge[] = [];
@@ -30,9 +29,8 @@ export default async function getPersonNodesAndEdges(
   // Creating nodes and edges
   const mainNode: Node = {
     id: uuidv4(),
-    data: { label: person.name },
+    data: { person },
     position: { x: 0, y: 0 },
-    height: NODE_HEIGHT,
     width: NODE_WIDTH,
   };
 
@@ -47,9 +45,11 @@ export default async function getPersonNodesAndEdges(
   for (const film of personFilms) {
     const filmNode: Node = {
       id: uuidv4(),
-      data: { label: film.title },
-      position: { x: currentFilmNodeHorizontalPosition, y: 100 },
-      height: NODE_HEIGHT,
+      data: { film },
+      position: {
+        x: currentFilmNodeHorizontalPosition,
+        y: FILM_NODES_VERTICAL_OFFSET,
+      },
       width: NODE_WIDTH,
     };
 
@@ -67,7 +67,7 @@ export default async function getPersonNodesAndEdges(
 
     const filmStarships: Starship[] = await getStarshipsOfPersonInFilm(
       person.id,
-      film.episode_id
+      film.id
     );
 
     let previousNodeId = filmNode.id;
@@ -76,12 +76,11 @@ export default async function getPersonNodesAndEdges(
       if (starship) {
         const starshipNode: Node = {
           id: uuidv4(),
-          data: { label: starship.name },
+          data: { starship },
           position: {
             x: filmNode.position.x,
             y: currentStarshipNodeVerticalPosition,
           },
-          height: NODE_HEIGHT,
           width: NODE_WIDTH,
         };
 
@@ -100,6 +99,10 @@ export default async function getPersonNodesAndEdges(
     }
     currentFilmNodeHorizontalPosition += FILM_NODES_HORIZONTAL_OFFSET;
   }
+
+  nodes.forEach((node) => {
+    node.type = "customNode";
+  });
 
   return [nodes, edges];
 }
