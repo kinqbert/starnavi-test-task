@@ -23,26 +23,45 @@ export async function getPeoplesPage(page = 1) {
   return response.data as PeopleResponse;
 }
 
-export async function getPersonById(id: string | number) {
+export async function getPersonById(id: number) {
   const response = await apiClient.get(
-    `https://sw-api.starnavi.io/people/${id}`
+    `https://sw-api.starnavi.io/people/${id}/`
   );
 
   return response.data as Person;
 }
 
-export async function getFilmById(id: string | number) {
+export async function getFilmById(id: number) {
   const response = await apiClient.get(
-    `https://sw-api.starnavi.io/films/${id}`
+    `https://sw-api.starnavi.io/films/${id}/`
   );
 
   return response.data as Film;
 }
 
-export async function getStarshipById(id: string | number) {
+export async function getStarshipById(id: number) {
   const response = await apiClient.get(
-    `https://sw-api.starnavi.io/starships/${id}`
+    `https://sw-api.starnavi.io/starships/${id}/`
   );
 
   return response.data as Starship;
+}
+
+export async function getFilmsOfPerson(personId: number) {
+  const response = await apiClient.get(
+    `https://sw-api.starnavi.io/films/?characters=${personId}`
+  );
+
+  return response.data.results as Film[];
+}
+
+export async function getStarshipsOfPersonInFilm(
+  personId: number,
+  filmId: number
+) {
+  const response = await apiClient.get(
+    `https://sw-api.starnavi.io/starships/?pilots=${personId}&films=${filmId}`
+  );
+
+  return response.data.results as Starship[];
 }

@@ -1,11 +1,13 @@
 import { Edge, Node } from "@xyflow/react";
+import { v4 as uuidv4 } from "uuid";
+
+import { getFilmsOfPerson, getStarshipsOfPersonInFilm } from "../api/api";
 
 import Person from "../types/Person";
-
-import { getFilmById, getStarshipById } from "../api/api";
 import Film from "../types/Film";
 import Starship from "../types/Starship";
 
+// TODO -- split into two functions
 export default async function getPersonNodesAndEdges(
   person: Person
 ): Promise<[Node[], Edge[]]> {
@@ -23,15 +25,11 @@ export default async function getPersonNodesAndEdges(
   const edges: Edge[] = [];
 
   // Fetching all data needed for graph
-  const personFilms: Film[] = await Promise.all(
-    person.films.map(async (filmId) => {
-      return getFilmById(filmId);
-    })
-  );
+  const personFilms: Film[] = await getFilmsOfPerson(person.id);
 
   // Creating nodes and edges
   const mainNode: Node = {
-    id: `person-${person.id}`,
+    id: uuidv4(),
     data: { label: person.name },
     position: { x: 0, y: 0 },
     height: NODE_HEIGHT,
@@ -48,7 +46,7 @@ export default async function getPersonNodesAndEdges(
 
   for (const film of personFilms) {
     const filmNode: Node = {
-      id: `film-${film.episode_id}`,
+      id: uuidv4(),
       data: { label: film.title },
       position: { x: currentFilmNodeHorizontalPosition, y: 100 },
       height: NODE_HEIGHT,
@@ -56,7 +54,7 @@ export default async function getPersonNodesAndEdges(
     };
 
     const filmEdge: Edge = {
-      id: `edge-${mainNode.id}-${filmNode.id}`,
+      id: uuidv4(),
       source: mainNode.id,
       target: filmNode.id,
     };
@@ -67,14 +65,17 @@ export default async function getPersonNodesAndEdges(
     let currentStarshipNodeVerticalPosition =
       filmNode.position.y + STARSHIP_NODES_VERTICAL_OFFSET;
 
-    const filmStarships: Starship[] = await Promise.all(
-      film.starships.map(async (starshipId) => getStarshipById(starshipId))
+    const filmStarships: Starship[] = await getStarshipsOfPersonInFilm(
+      person.id,
+      film.episode_id
     );
+
+    let previousNodeId = filmNode.id;
 
     for (const starship of filmStarships) {
       if (starship) {
         const starshipNode: Node = {
-          id: `starship-${starship.id}`,
+          id: uuidv4(),
           data: { label: starship.name },
           position: {
             x: filmNode.position.x,
@@ -84,20 +85,19 @@ export default async function getPersonNodesAndEdges(
           width: NODE_WIDTH,
         };
 
-        nodes.push(starshipNode);
+        const starshipEdge: Edge = {
+          id: uuidv4(),
+          source: previousNodeId,
+          target: starshipNode.id,
+        };
 
+        nodes.push(starshipNode);
+        edges.push(starshipEdge);
+
+        previousNodeId = starshipNode.id;
         currentStarshipNodeVerticalPosition += STARSHIP_NODES_VERTICAL_OFFSET;
       }
-
-      // const starshipEdge: Edge = {
-      //   id: `edge-${filmNode.id}-${starshipNode.id}`,
-      //   source: filmNode.id,
-      //   target: starshipNode.id,
-      // };
-
-      // edges.push(starshipEdge);
     }
-
     currentFilmNodeHorizontalPosition += FILM_NODES_HORIZONTAL_OFFSET;
   }
 

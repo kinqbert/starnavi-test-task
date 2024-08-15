@@ -8,6 +8,7 @@ import PeopleList from "../../components/PeopleList";
 
 import "./MainPage.scss";
 import Pagination from "../../components/Pagination";
+import { PuffLoader } from "react-spinners";
 
 export default function MainPage() {
   const [people, setPeople] = useState<Person[]>([]);
@@ -17,6 +18,7 @@ export default function MainPage() {
 
   useEffect(() => {
     setIsLoading(true);
+
     getPeoplesPage(pageNumber).then((response) => {
       setPeople(response.results);
       setIsLoading(false);
@@ -28,8 +30,14 @@ export default function MainPage() {
     <div className="main-page">
       <div className="container">
         <h1 className="main-page__title">Star Wars Characters</h1>
-        <div>
-          <PeopleList people={people} />
+        <div className="main-page__content-wrapper">
+          {isLoading ? (
+            <div className="main-page__loading-wrapper">
+              <PuffLoader />
+            </div>
+          ) : (
+            <PeopleList people={people} />
+          )}
         </div>
         <div className="main-page__pagination-wrapper">
           <Pagination

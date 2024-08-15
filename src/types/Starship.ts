@@ -14,7 +14,7 @@ export default interface Starship {
   cargo_capacity: string;
   consumables: string;
   films: number[];
-  pilots: (number | string)[];
+  pilots: number[];
   url: string;
   created: string;
   edited: string;
