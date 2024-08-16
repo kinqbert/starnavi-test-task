@@ -18,12 +18,11 @@ import { nodeTypes } from "../../constants/nodeTypes";
 
 import Person from "../../types/Person";
 
-import getPersonNodesAndEdges from "../../utils/createPersonNodesAndEdges";
 import { getPersonProps } from "../../utils/getProps";
-
-import "./PersonPage.scss";
 import fetchPersonData from "../../utils/fetchPersonData";
 import createPersonNodesAndEdges from "../../utils/createPersonNodesAndEdges";
+
+import "./PersonPage.scss";
 
 function PersonPageChild() {
   const { id: personId } = useParams();
