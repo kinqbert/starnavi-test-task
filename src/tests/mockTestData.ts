@@ -221,6 +221,7 @@ export const mockStarships: { [filmId: string]: Starship[] } = {
 };
 
 export const mockPersonData: PersonData = {
+  person: mockPerson,
   films: mockFilms,
   filmStarships: mockStarships,
 };

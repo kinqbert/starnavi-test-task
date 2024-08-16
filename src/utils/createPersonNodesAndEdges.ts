@@ -1,11 +1,9 @@
 import { Edge, Node } from "@xyflow/react";
 import { v4 as uuidv4 } from "uuid";
-import Person from "../types/Person";
 
 import PersonData from "../types/PersonData";
 
 export default function createPersonNodesAndEdges(
-  person: Person,
   personData: PersonData
 ): [Node[], Edge[]] {
   const NODE_WIDTH = 150;
@@ -23,7 +21,7 @@ export default function createPersonNodesAndEdges(
 
   const mainNode: Node = {
     id: uuidv4(),
-    data: { person },
+    data: { person: personData.person },
     position: { x: 0, y: 0 },
     width: NODE_WIDTH,
   };

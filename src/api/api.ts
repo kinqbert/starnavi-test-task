@@ -5,16 +5,6 @@ import Starship from "../types/Starship";
 
 import { apiClient } from "./apiClient";
 
-export async function getPeopleByAddress(address: string) {
-  if (address) {
-    const response = await apiClient.get(address);
-
-    return response.data as PeopleResponse;
-  } else {
-    return {} as PeopleResponse;
-  }
-}
-
 export async function getPeoplesPage(page = 1) {
   const response = await apiClient.get(
     `https://sw-api.starnavi.io/people/?page=${page}`
@@ -31,22 +21,6 @@ export async function getPersonById(id: number) {
   return response.data as Person;
 }
 
-export async function getFilmById(id: number) {
-  const response = await apiClient.get(
-    `https://sw-api.starnavi.io/films/${id}/`
-  );
-
-  return response.data as Film;
-}
-
-export async function getStarshipById(id: number) {
-  const response = await apiClient.get(
-    `https://sw-api.starnavi.io/starships/${id}/`
-  );
-
-  return response.data as Starship;
-}
-
 export async function getFilmsOfPerson(person: Person) {
   const response = await apiClient.get(
     `https://sw-api.starnavi.io/films/?id__in=${person.films.join(",")}`
@@ -57,6 +31,7 @@ export async function getFilmsOfPerson(person: Person) {
   return response.data.results as Film[];
 }
 
+// returns list of starships, that certain person have used in certain film
 export async function getStarshipsOfPersonInFilm(
   personId: number,
   filmId: number

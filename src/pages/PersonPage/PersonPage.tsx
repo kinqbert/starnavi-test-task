@@ -32,7 +32,7 @@ function PersonPageChild() {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
-  const reactFlowInstance = useReactFlow();
+  const reactFlowInstance = useReactFlow(); // needed for "Reset view" button
 
   useEffect(() => {
     if (personId) {
@@ -40,12 +40,11 @@ function PersonPageChild() {
         if (response) {
           setPerson(response);
 
+          // personData includes all data needed to create graph tree
           const personData = await fetchPersonData(response);
 
-          const [personNodes, personEdges] = createPersonNodesAndEdges(
-            response,
-            personData
-          );
+          const [personNodes, personEdges] =
+            createPersonNodesAndEdges(personData);
 
           setNodes(personNodes);
           setEdges(personEdges);
@@ -57,10 +56,16 @@ function PersonPageChild() {
   }, [personId]);
 
   if (!person) {
-    return <h2>Person does not exist...</h2>;
+    return null;
   }
 
   const personProps = getPersonProps(person, true);
+
+  const onFitViewClick = () => {
+    if (reactFlowInstance) {
+      reactFlowInstance.fitView(); // fit the view on button click
+    }
+  };
 
   return (
     <div className="person-page">
@@ -96,11 +101,7 @@ function PersonPageChild() {
                   </Link>
                   <button
                     className="person-page__info-button"
-                    onClick={() => {
-                      if (reactFlowInstance) {
-                        reactFlowInstance.fitView(); // Fit the view on button click
-                      }
-                    }}
+                    onClick={onFitViewClick}
                   >
                     {"Reset view"}
                   </button>
@@ -134,7 +135,7 @@ function PersonPageChild() {
   );
 }
 
-// This additional wrapper is needed to make it possible to use React Flow hook inside component
+// this additional wrapper is needed to make it possible to use React Flow hook inside component
 export default function PersonPage() {
   return (
     <ReactFlowProvider>

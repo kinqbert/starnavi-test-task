@@ -4,6 +4,7 @@ interface Props {
 
 import "./Icon.scss";
 
+// this component is used to make it easier to use icons
 export default function Icon({ type }: Props) {
   switch (type) {
     case "person":

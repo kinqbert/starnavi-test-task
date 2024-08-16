@@ -1,8 +1,11 @@
 import { Handle, Position } from "@xyflow/react";
 
+import Icon from "../Icon";
+
 import Person from "../../types/Person";
 import Film from "../../types/Film";
 import Starship from "../../types/Starship";
+import Prop from "../../types/Prop";
 
 import {
   getFilmProps,
@@ -11,8 +14,6 @@ import {
 } from "../../utils/getProps";
 
 import "./CustomNode.scss";
-import Prop from "../../types/Prop";
-import Icon from "../Icon";
 
 interface Props {
   data: {
@@ -22,6 +23,7 @@ interface Props {
   };
 }
 
+// this is custom node for React Flow to make graph look beautiful
 function CustomNode({ data }: Props) {
   const { person, film, starship } = data;
 
@@ -29,6 +31,8 @@ function CustomNode({ data }: Props) {
   let nodeHeader: string = "";
   let icon: React.ReactNode = null;
 
+  // this ifs have to be here to make this component universal for Person, Film and Starship types.
+  // depending on what have been passed, different functions will be called and thoroughly different props will be returned
   if (person) {
     nodeHeader = person.name;
     icon = Icon({ type: "person" });

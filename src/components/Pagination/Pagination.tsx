@@ -1,12 +1,13 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import "./Pagination.scss";
 import cn from "classnames";
 
+import "./Pagination.scss";
+
 interface Props {
-  pagesAmount: number;
-  setPageNumber: Dispatch<SetStateAction<number>>;
-  currentPageNumber: number;
-  isLoading: boolean;
+  pagesAmount: number; // whole amount of pages
+  setPageNumber: Dispatch<SetStateAction<number>>; // setter to set page number
+  currentPageNumber: number; // current page number
+  isLoading: boolean; // needed to disable navigation to prevent age switch before info is loaded
 }
 
 export default function Pagination({
@@ -17,6 +18,7 @@ export default function Pagination({
 }: Props) {
   const [pageNumbers, setPageNumbers] = useState<number[]>([]);
 
+  // creates array of page numbers
   useEffect(() => {
     const newItemsArray: number[] = [];
 
@@ -27,6 +29,7 @@ export default function Pagination({
     setPageNumbers(newItemsArray);
   }, [pagesAmount]);
 
+  // if there are no page, nothing will be rendered
   if (pagesAmount === 0) {
     return null;
   }
@@ -45,14 +48,15 @@ export default function Pagination({
       </button>
       <div className="pagination__items">
         {pageNumbers.map((pageNumber) => (
-          <div
+          <button
             onClick={() => setPageNumber(pageNumber)}
             className={cn("pagination__item", {
               "pagination__item--active": currentPageNumber === pageNumber,
             })}
+            disabled={isLoading}
           >
             {pageNumber}
-          </div>
+          </button>
         ))}
       </div>
       <button

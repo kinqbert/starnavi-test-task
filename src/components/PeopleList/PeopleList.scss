@@ -1,3 +1,6 @@
+@import "../../styles/variables.scss";
+@import "../../styles/colors.scss";
+
 .people-list {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -19,5 +22,21 @@
 
   @media screen and (min-width: 1400px) {
     grid-template-columns: repeat(5, 1fr);
+  }
+
+
+  &__placeholder {
+    height: $card-height;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: $grey-primary;
+    background-color: $card__bg;
+    
+    border-radius: $default-border-radius;
+
+    font-size: 16px;
   }
 }

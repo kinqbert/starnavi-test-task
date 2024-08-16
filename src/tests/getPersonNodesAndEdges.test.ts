@@ -14,63 +14,79 @@ vi.mock("uuid", () => ({
 
 describe("createPersonNodesAndEdges", () => {
   it("should create nodes and edges for the given person and their films and starships", () => {
-    const [nodes, edges] = createPersonNodesAndEdges(
-      mockPerson,
-      mockPersonData
-    );
+    const [nodes, edges] = createPersonNodesAndEdges(mockPersonData);
 
     expect(nodes.length).toBe(10); // 1 person + 4 films + 5 starships
     expect(edges.length).toBe(9); // 4 (from person to films) + 5 (from films to starships)
 
-    expect(nodes[0]).toEqual(expect.objectContaining({
-      id: "mocked-uuid",
-      data: { person: mockPerson },
-      type: "customNode",
-    }))
-    expect(nodes[1]).toEqual(expect.objectContaining({
-      id: "mocked-uuid",
-      data: { film: mockFilms[0] },
-      type: "customNode",
-    }))
-    expect(nodes[2]).toEqual(expect.objectContaining({
-      id: "mocked-uuid",
-      data: { starship: mockStarships[mockFilms[0].id][0] },
-      type: "customNode",
-    }))
-    expect(nodes[3]).toEqual(expect.objectContaining({
-      id: "mocked-uuid",
-      data: { film: mockFilms[1] },
-      type: "customNode",
-    }))
-    expect(nodes[4]).toEqual(expect.objectContaining({
-      id: "mocked-uuid",
-      data: { starship: mockStarships[mockFilms[1].id][0] },
-      type: "customNode",
-    }))
-    expect(nodes[5]).toEqual(expect.objectContaining({
-      id: "mocked-uuid",
-      data: { starship: mockStarships[mockFilms[1].id][1] },
-      type: "customNode",
-    }))
-    expect(nodes[6]).toEqual(expect.objectContaining({
-      id: "mocked-uuid",
-      data: { film: mockFilms[2] },
-      type: "customNode",
-    }))
-    expect(nodes[7]).toEqual(expect.objectContaining({
-      id: "mocked-uuid",
-      data: { starship: mockStarships[mockFilms[2].id][0] },
-      type: "customNode",
-    }))
-    expect(nodes[8]).toEqual(expect.objectContaining({
-      id: "mocked-uuid",
-      data: { starship: mockStarships[mockFilms[2].id][1] },
-      type: "customNode",
-    }))
+    expect(nodes[0]).toEqual(
+      expect.objectContaining({
+        id: "mocked-uuid",
+        data: { person: mockPerson },
+        type: "customNode",
+      })
+    );
+    expect(nodes[1]).toEqual(
+      expect.objectContaining({
+        id: "mocked-uuid",
+        data: { film: mockFilms[0] },
+        type: "customNode",
+      })
+    );
+    expect(nodes[2]).toEqual(
+      expect.objectContaining({
+        id: "mocked-uuid",
+        data: { starship: mockStarships[mockFilms[0].id][0] },
+        type: "customNode",
+      })
+    );
+    expect(nodes[3]).toEqual(
+      expect.objectContaining({
+        id: "mocked-uuid",
+        data: { film: mockFilms[1] },
+        type: "customNode",
+      })
+    );
+    expect(nodes[4]).toEqual(
+      expect.objectContaining({
+        id: "mocked-uuid",
+        data: { starship: mockStarships[mockFilms[1].id][0] },
+        type: "customNode",
+      })
+    );
+    expect(nodes[5]).toEqual(
+      expect.objectContaining({
+        id: "mocked-uuid",
+        data: { starship: mockStarships[mockFilms[1].id][1] },
+        type: "customNode",
+      })
+    );
+    expect(nodes[6]).toEqual(
+      expect.objectContaining({
+        id: "mocked-uuid",
+        data: { film: mockFilms[2] },
+        type: "customNode",
+      })
+    );
+    expect(nodes[7]).toEqual(
+      expect.objectContaining({
+        id: "mocked-uuid",
+        data: { starship: mockStarships[mockFilms[2].id][0] },
+        type: "customNode",
+      })
+    );
+    expect(nodes[8]).toEqual(
+      expect.objectContaining({
+        id: "mocked-uuid",
+        data: { starship: mockStarships[mockFilms[2].id][1] },
+        type: "customNode",
+      })
+    );
   });
 
   it("should create nodes and edges even if no starships are present", () => {
     const noStarshipsPersonData = {
+      person: mockPerson,
       films: mockFilms,
       filmStarships: {
         1: [],
@@ -80,7 +96,6 @@ describe("createPersonNodesAndEdges", () => {
     };
 
     const [nodes, edges] = createPersonNodesAndEdges(
-      mockPerson,
       noStarshipsPersonData
     );
 
