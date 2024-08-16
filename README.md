@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# STARNAVI Test Task - React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome! This is a React application that was created as a test task for STARNAVI. The application is an observer for Star Wars characters and details for each character.
 
-Currently, two official plugins are available:
+Task description can be found [here](https://docs.google.com/document/d/1TV_hGp2zbnVVPqA4-dXi3XEcYJIXufBbCZU7aBLVZCw/edit).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Short video demonstration can be found [here](https://drive.google.com/file/d/1J9Q6J9Q6J9Q6J9Q6J9Q6J9Q6J9Q6J9Q6/view?usp=sharing).
 
-## Expanding the ESLint configuration
+## Screenshots
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Main page
+![Main page image](./readme-images/main-page.png)
 
-- Configure the top-level `parserOptions` property like this:
+### Person page
+![Person page image](./readme-images/person-page-image.png)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Technologies
+
+- React
+- TypeScript
+- Vite
+- SCSS
+- Axios
+- [react-spinners](https://www.npmjs.com/package/react-spinners)
+
+## Launch
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/kinqbert/starnavi-test-task.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Install dependencies
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+3. Start the development server
+
+```bash
+npm run dev
+```
+
+4. Open the browser and navigate to [http://localhost:5173](http://localhost:5173)
