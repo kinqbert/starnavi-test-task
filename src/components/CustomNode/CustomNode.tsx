@@ -57,7 +57,7 @@ function CustomNode({ data }: Props) {
       </div>
       <ul className="node__props">
         {props.map((prop) => (
-          <li className="node__prop">
+          <li key={prop.name} className="node__prop">
             <span className="node__prop-name">{prop.name}</span>
             <span className="node__prop-value">{prop.value}</span>
           </li>

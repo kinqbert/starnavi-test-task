@@ -47,10 +47,12 @@ export async function getStarshipById(id: number) {
   return response.data as Starship;
 }
 
-export async function getFilmsOfPerson(personId: number) {
+export async function getFilmsOfPerson(person: Person) {
   const response = await apiClient.get(
-    `https://sw-api.starnavi.io/films/?characters=${personId}`
+    `https://sw-api.starnavi.io/films/?id__in=${person.films.join(",")}`
   );
+
+  console.log(response.data)
 
   return response.data.results as Film[];
 }

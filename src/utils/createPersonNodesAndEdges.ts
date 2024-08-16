@@ -1,16 +1,13 @@
 import { Edge, Node } from "@xyflow/react";
 import { v4 as uuidv4 } from "uuid";
-
-import { getFilmsOfPerson, getStarshipsOfPersonInFilm } from "../api/api";
-
 import Person from "../types/Person";
-import Film from "../types/Film";
-import Starship from "../types/Starship";
 
-// TODO -- split into two functions
-export default async function getPersonNodesAndEdges(
-  person: Person
-): Promise<[Node[], Edge[]]> {
+import PersonData from "../types/PersonData";
+
+export default function createPersonNodesAndEdges(
+  person: Person,
+  personData: PersonData
+): [Node[], Edge[]] {
   const NODE_WIDTH = 150;
 
   const FILM_NODES_VERTICAL_OFFSET = 200;
@@ -19,15 +16,11 @@ export default async function getPersonNodesAndEdges(
 
   const STARSHIP_NODES_VERTICAL_FIRST_GAP = 350;
   const STARSHIP_NODES_VERTICAL_GAP = 230;
-  const STARSHIP_NODES_VERTICAL_OFFSET = STARSHIP_NODES_VERTICAL_GAP; // TODO -- check if correct
+  const STARSHIP_NODES_VERTICAL_OFFSET = STARSHIP_NODES_VERTICAL_GAP;
 
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
-  // Fetching all data needed for graph
-  const personFilms: Film[] = await getFilmsOfPerson(person.id);
-
-  // Creating nodes and edges
   const mainNode: Node = {
     id: uuidv4(),
     data: { person },
@@ -37,13 +30,12 @@ export default async function getPersonNodesAndEdges(
 
   nodes.push(mainNode);
 
-  // Creating nodes for each film
   let currentFilmNodeHorizontalPosition = -(
-    (FILM_NODES_HORIZONTAL_OFFSET * (person.films.length - 1)) /
+    (FILM_NODES_HORIZONTAL_OFFSET * (personData.films.length - 1)) /
     2
   );
 
-  for (const film of personFilms) {
+  for (const film of personData.films) {
     const filmNode: Node = {
       id: uuidv4(),
       data: { film },
@@ -65,12 +57,13 @@ export default async function getPersonNodesAndEdges(
 
     let currentStarshipNodeVerticalPosition = STARSHIP_NODES_VERTICAL_FIRST_GAP;
 
-    const filmStarships: Starship[] = await getStarshipsOfPersonInFilm(
-      person.id,
-      film.id
-    );
+    const filmStarships = personData.filmStarships[film.id];
 
     let previousNodeId = filmNode.id;
+
+    if (!filmStarships) {
+      continue
+    }
 
     for (const starship of filmStarships) {
       if (starship) {

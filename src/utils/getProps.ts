@@ -12,6 +12,7 @@ export function getPersonProps(person: Person, detailed = false) {
   props.push({ name: "Mass", value: person.mass });
 
   if (detailed) {
+    props.unshift({ name: "ID", value: person.id });
     props.push({ name: "Homeworld", value: person.homeworld });
     props.push({ name: "Hair color", value: person.hair_color });
     props.push({ name: "Skin color", value: person.skin_color });
@@ -24,6 +25,7 @@ export function getPersonProps(person: Person, detailed = false) {
 export function getFilmProps(film: Film) {
   const props: Prop[] = [];
 
+  props.push({ name: "ID", value: film.id });
   props.push({ name: "Episode ID", value: film.episode_id });
   props.push({ name: "Director", value: film.director });
   props.push({ name: "Release date", value: film.release_date });
@@ -34,6 +36,7 @@ export function getFilmProps(film: Film) {
 export function getStarshipProps(starship: Starship) {
   const props: Prop[] = [];
 
+  props.push({ name: "ID", value: starship.id });
   props.push({ name: "Class", value: starship.starship_class });
   props.push({ name: "Manufacturer", value: starship.manufacturer });
   props.push({ name: "Cost (CR)", value: starship.cost_in_credits });

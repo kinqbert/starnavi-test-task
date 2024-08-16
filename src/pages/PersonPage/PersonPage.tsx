@@ -18,10 +18,12 @@ import { nodeTypes } from "../../constants/nodeTypes";
 
 import Person from "../../types/Person";
 
-import getPersonNodesAndEdges from "../../utils/getPersonNodesAndEdges";
+import getPersonNodesAndEdges from "../../utils/createPersonNodesAndEdges";
 import { getPersonProps } from "../../utils/getProps";
 
 import "./PersonPage.scss";
+import fetchPersonData from "../../utils/fetchPersonData";
+import createPersonNodesAndEdges from "../../utils/createPersonNodesAndEdges";
 
 function PersonPageChild() {
   const { id: personId } = useParams();
@@ -39,8 +41,11 @@ function PersonPageChild() {
         if (response) {
           setPerson(response);
 
-          const [personNodes, personEdges] = await getPersonNodesAndEdges(
-            response
+          const personData = await fetchPersonData(response);
+
+          const [personNodes, personEdges] = createPersonNodesAndEdges(
+            response,
+            personData
           );
 
           setNodes(personNodes);
