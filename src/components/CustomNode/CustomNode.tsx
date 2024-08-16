@@ -12,6 +12,7 @@ import {
 
 import "./CustomNode.scss";
 import Prop from "../../types/Prop";
+import Icon from "../Icon";
 
 interface Props {
   data: {
@@ -26,19 +27,23 @@ function CustomNode({ data }: Props) {
 
   const props: Prop[] = [];
   let nodeHeader: string = "";
+  let icon: React.ReactNode = null;
 
   if (person) {
     nodeHeader = person.name;
+    icon = Icon({ type: "person" });
     const personProps = getPersonProps(person);
 
     props.push(...personProps);
   } else if (film) {
     nodeHeader = film.title;
+    icon = Icon({ type: "film" });
     const filmProps = getFilmProps(film);
 
     props.push(...filmProps);
   } else if (starship) {
     nodeHeader = starship.name;
+    icon = Icon({ type: "starship" });
     const starshipProps = getStarshipProps(starship);
 
     props.push(...starshipProps);
@@ -48,6 +53,7 @@ function CustomNode({ data }: Props) {
     <div className="node">
       <div className="node__header">
         <span>{nodeHeader}</span>
+        <div className="node__icon-wrapper">{icon}</div>
       </div>
       <ul className="node__props">
         {props.map((prop) => (
