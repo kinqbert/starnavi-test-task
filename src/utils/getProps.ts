@@ -38,7 +38,6 @@ export function getStarshipProps(starship: Starship) {
 
   props.push({ name: "ID", value: starship.id });
   props.push({ name: "Class", value: starship.starship_class });
-  props.push({ name: "Manufacturer", value: starship.manufacturer });
   props.push({ name: "Cost (CR)", value: starship.cost_in_credits });
   props.push({ name: "Crew", value: starship.crew });
   props.push({ name: "Passengers", value: starship.passengers });
