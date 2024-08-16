@@ -4,7 +4,7 @@ Welcome! This is a React application that was created as a test task for STARNAV
 
 Task description can be found [here](https://docs.google.com/document/d/1TV_hGp2zbnVVPqA4-dXi3XEcYJIXufBbCZU7aBLVZCw/edit).
 
-Short video demonstration can be found [here](https://drive.google.com/file/d/1J9Q6J9Q6J9Q6J9Q6J9Q6J9Q6J9Q6J9Q6/view?usp=sharing).
+Short video demonstration can be found [here](https://www.loom.com/share/5594a8e579be4d1e9907514d1d4aa355?sid=5b386e47-d939-452d-92ac-a605fd20a880).
 
 ## Screenshots
 
