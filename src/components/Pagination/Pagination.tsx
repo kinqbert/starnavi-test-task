@@ -49,6 +49,7 @@ export default function Pagination({
       <div className="pagination__items">
         {pageNumbers.map((pageNumber) => (
           <button
+            key={pageNumber}
             onClick={() => setPageNumber(pageNumber)}
             className={cn("pagination__item", {
               "pagination__item--active": currentPageNumber === pageNumber,

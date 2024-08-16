@@ -16,7 +16,7 @@
   }
 
   &__info {
-    border: 1px solid $person-page__section-border; 
+    border: 1px solid $person-page__section-border;
     border-radius: $default-border-radius;
 
     display: flex;
@@ -37,15 +37,15 @@
     border: none;
     border-radius: $button__border-radius;
 
-    color: $button__text;
-    background-color: $button__bg;
+    color: $button__filled__text;
+    background-color: $button__filled__bg;
 
     cursor: pointer;
 
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: $button__bg--hover;
+      background-color: $button__filled__bg--hover;
     }
   }
 

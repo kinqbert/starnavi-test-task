@@ -1,9 +1,12 @@
 $grey-primary: #212121;
 
-$button__text: #ffffff;
-$button__bg: #212121;
-$button__bg--hover: #3a3a3a;
-$button__bg--disabled: #5f5f5f;
+$button__filled__text: #ffffff;
+$button__filled__bg: #212121;
+$button__filled__bg--hover: #3a3a3a;
+$button__outlined__text: #212121;
+$button__outlined__bg: #ffffff;
+$button__outlined__border: #212121;
+$button__outlined__bg--hover: #e0e0e0;
 
 $pagination__text: #212121;
 $pagination__text--active: #ffffff;

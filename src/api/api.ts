@@ -5,12 +5,21 @@ import Starship from "../types/Starship";
 
 import { apiClient } from "./apiClient";
 
-export async function getPeoplesPage(page = 1) {
+export async function getPeoplesPage(page = 1, query = "") {
+  if (query) {
+    const response = await apiClient.get(
+      `https://sw-api.starnavi.io/people/?page=${page}&name__contains=${query}`
+    );
+
+    return response.data as PeopleResponse;
+  }
+
   const response = await apiClient.get(
     `https://sw-api.starnavi.io/people/?page=${page}`
   );
 
   return response.data as PeopleResponse;
+  
 }
 
 export async function getPersonById(id: number) {

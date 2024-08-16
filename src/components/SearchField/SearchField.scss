@@ -1,0 +1,46 @@
+@import "../../styles/colors.scss";
+@import "../../styles/variables.scss";
+
+.search-field {
+  display: flex;
+  gap: 10px;
+
+  &__input {
+    width: 220px;
+    padding: 10px 10px;
+
+    border: 1px solid $pagination__border;
+
+    border-radius: $default-border-radius;
+  }
+
+  &__button {
+    padding: 10px 20px;
+
+    border: none;
+    border-radius: $default-border-radius;
+
+    color: $button__filled__text;
+    background-color: $button__filled__bg;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $button__filled__bg--hover;
+    }
+
+    &--outline {
+      color: $button__outlined__text;
+
+      background-color: transparent;
+
+      border: 1px solid $button__outlined__border;
+
+      &:hover {
+        background-color: $button__outlined__bg--hover;
+      }
+    }
+  }
+}

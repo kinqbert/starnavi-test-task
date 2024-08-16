@@ -8,6 +8,7 @@ import Pagination from "../../components/Pagination";
 import Person from "../../types/Person";
 
 import "./MainPage.scss";
+import SearchField from "../../components/SearchField";
 
 export default function MainPage() {
   const [people, setPeople] = useState<Person[]>([]); // list of people
@@ -15,22 +16,43 @@ export default function MainPage() {
   const [pageNumber, setPageNumber] = useState(1); // current page number
   const pagesAmount = useRef(0);
 
-  // being called after first render and every time page number changes
-  useEffect(() => {
+  const fetchPeople = (page: number, searchQuery?: string) => {
     setIsLoading(true);
 
-    // getting people for a page from API
-    getPeoplesPage(pageNumber).then((response) => {
+    getPeoplesPage(page, searchQuery).then((response) => {
       setPeople(response.results);
       pagesAmount.current = Math.ceil(response.count / 10);
       setIsLoading(false);
     });
+  };
+
+  // being called after first render and every time page number changes
+  useEffect(() => {
+    fetchPeople(pageNumber);
   }, [pageNumber]);
+
+  const onSubmitClick = (inputValue: string) => {
+    setPageNumber(1);
+    pagesAmount.current = 0;
+    fetchPeople(1, inputValue);
+  };
+
+  const onResetClick = () => {
+    setPageNumber(1);
+    pagesAmount.current = 0;
+    fetchPeople(1);
+  };
 
   return (
     <div className="main-page">
       <div className="container">
-        <h1 className="main-page__title">Star Wars Characters</h1>
+        <header className="main-page__header">
+          <h1 className="main-page__title">Star Wars Characters</h1>
+          <SearchField
+            onSubmitClick={onSubmitClick}
+            onResetClick={onResetClick}
+          />
+        </header>
         <div className="main-page__content-wrapper">
           <PeopleList people={people} />
           <div className="main-page__pagination-wrapper">

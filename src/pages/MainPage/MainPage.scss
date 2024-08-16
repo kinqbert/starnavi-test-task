@@ -1,4 +1,15 @@
 .main-page {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media screen and (max-width: 880px) {
+      margin-bottom: 20px;
+      flex-direction: column;
+    }
+  }
+
   &__loading-wrapper {
     width: 100%;
 

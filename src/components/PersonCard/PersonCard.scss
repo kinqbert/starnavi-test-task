@@ -1,17 +1,17 @@
-@import '../../styles/variables.scss';
-@import '../../styles/colors.scss';
+@import "../../styles/variables.scss";
+@import "../../styles/colors.scss";
 
 .person-card {
   height: $card-height;
   position: relative;
-  
+
   padding: 20px;
 
   color: $grey-primary;
   background-color: transparent;
-  
+
   border-radius: $default-border-radius;
-  
+
   transition: transform 0.3s ease;
 
   &:hover .person-card__background {
@@ -19,7 +19,7 @@
     transform: scaleY(1.2);
     z-index: 0;
   }
-  
+
   &:hover .person-card__button {
     opacity: 1;
   }
@@ -68,14 +68,14 @@
 
     cursor: pointer;
 
-    color: $button__text;
-    background-color: $button__bg;
-    
+    color: $button__filled__text;
+    background-color: $button__filled__bg;
+
     border: none;
     border-radius: $button__border-radius;
 
     &:hover {
-      background-color: $button__bg--hover;
+      background-color: $button__filled__bg--hover;
     }
   }
 
