@@ -8,6 +8,11 @@
     display: grid;
     grid-template-columns: 2fr 5fr;
     column-gap: 20px;
+
+    @media screen and (max-width: 900px) {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
   }
 
   &__info {
@@ -84,7 +89,7 @@
   /* #endregion */
 
   &__graph-wrapper {
-    height: 800px;
+    height: 700px;
 
     border: 1px solid $person-page__section-border;
     border-radius: $default-border-radius;

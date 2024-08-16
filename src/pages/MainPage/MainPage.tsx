@@ -38,14 +38,14 @@ export default function MainPage() {
           ) : (
             <PeopleList people={people} />
           )}
-        </div>
-        <div className="main-page__pagination-wrapper">
-          <Pagination
-            pagesAmount={pagesAmount.current}
-            setPageNumber={setPageNumber}
-            currentPageNumber={pageNumber}
-            isLoading={isLoading}
-          />
+          <div className="main-page__pagination-wrapper">
+            <Pagination
+              pagesAmount={pagesAmount.current}
+              setPageNumber={setPageNumber}
+              currentPageNumber={pageNumber}
+              isLoading={isLoading}
+            />
+          </div>
         </div>
       </div>
     </div>
