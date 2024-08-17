@@ -5,13 +5,13 @@ import Icon from "../Icon";
 import Person from "../../types/Person";
 import Film from "../../types/Film";
 import Starship from "../../types/Starship";
-import Prop from "../../types/Prop";
+import Attribute from "../../types/Prop";
 
 import {
   getFilmProps,
   getPersonProps,
   getStarshipProps,
-} from "../../utils/getProps";
+} from "../../utils/getAttributes";
 
 import "./CustomNode.scss";
 
@@ -27,7 +27,7 @@ interface Props {
 function CustomNode({ data }: Props) {
   const { person, film, starship } = data;
 
-  const props: Prop[] = [];
+  const attributes: Attribute[] = [];
   let nodeHeader: string = "";
   let icon: React.ReactNode = null;
 
@@ -38,19 +38,19 @@ function CustomNode({ data }: Props) {
     icon = Icon({ type: "person" });
     const personProps = getPersonProps(person);
 
-    props.push(...personProps);
+    attributes.push(...personProps);
   } else if (film) {
     nodeHeader = film.title;
     icon = Icon({ type: "film" });
     const filmProps = getFilmProps(film);
 
-    props.push(...filmProps);
+    attributes.push(...filmProps);
   } else if (starship) {
     nodeHeader = starship.name;
     icon = Icon({ type: "starship" });
     const starshipProps = getStarshipProps(starship);
 
-    props.push(...starshipProps);
+    attributes.push(...starshipProps);
   }
 
   return (
@@ -60,7 +60,7 @@ function CustomNode({ data }: Props) {
         <div className="node__icon-wrapper">{icon}</div>
       </div>
       <ul className="node__props">
-        {props.map((prop) => (
+        {attributes.map((prop) => (
           <li key={prop.name} className="node__prop">
             <span className="node__prop-name">{prop.name}</span>
             <span className="node__prop-value">{prop.value}</span>

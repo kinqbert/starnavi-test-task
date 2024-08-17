@@ -5,21 +5,20 @@ import Starship from "../types/Starship";
 
 import { apiClient } from "./apiClient";
 
-export async function getPeoplesPage(page = 1, query = "") {
-  if (query) {
-    const response = await apiClient.get(
-      `https://sw-api.starnavi.io/people/?page=${page}&name__contains=${query}`
-    );
+async function getApiResponse<ResponseType>(url: string) {
+  const response = await apiClient.get(url);
 
-    return response.data as PeopleResponse;
+  return response.data as ResponseType;
+}
+
+export async function getPeoplesPage(page = 1, query = "") {
+  let url = `https://sw-api.starnavi.io/people/?page=${page}`;
+
+  if (query) {
+    url += `&name__contains=${query}`;
   }
 
-  const response = await apiClient.get(
-    `https://sw-api.starnavi.io/people/?page=${page}`
-  );
-
-  return response.data as PeopleResponse;
-  
+  return getApiResponse<PeopleResponse>(url);
 }
 
 export async function getPersonById(id: number) {
@@ -34,8 +33,6 @@ export async function getFilmsOfPerson(person: Person) {
   const response = await apiClient.get(
     `https://sw-api.starnavi.io/films/?id__in=${person.films.join(",")}`
   );
-
-  console.log(response.data)
 
   return response.data.results as Film[];
 }

@@ -11,6 +11,8 @@ import "./MainPage.scss";
 import SearchField from "../../components/SearchField";
 
 export default function MainPage() {
+  const peoplePerPage = 10;
+
   const [people, setPeople] = useState<Person[]>([]); // list of people
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(1); // current page number
@@ -54,7 +56,11 @@ export default function MainPage() {
           />
         </header>
         <div className="main-page__content-wrapper">
-          <PeopleList people={people} />
+          <PeopleList
+            people={people}
+            placeholderCount={peoplePerPage}
+            isLoading={isLoading}
+          />
           <div className="main-page__pagination-wrapper">
             <Pagination
               pagesAmount={pagesAmount.current || 0}

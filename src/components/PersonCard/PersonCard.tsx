@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Person from "../../types/Person";
 
-import { getPersonProps } from "../../utils/getProps";
+import { getPersonProps } from "../../utils/getAttributes";
 
 import "./PersonCard.scss";
 

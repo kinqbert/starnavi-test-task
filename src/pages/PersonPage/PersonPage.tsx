@@ -18,7 +18,7 @@ import { nodeTypes } from "../../constants/nodeTypes";
 
 import Person from "../../types/Person";
 
-import { getPersonProps } from "../../utils/getProps";
+import { getPersonProps } from "../../utils/getAttributes";
 import fetchPersonData from "../../utils/fetchPersonData";
 import createPersonNodesAndEdges from "../../utils/createPersonNodesAndEdges";
 
