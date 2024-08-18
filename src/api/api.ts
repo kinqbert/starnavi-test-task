@@ -22,19 +22,15 @@ export async function getPeoplesPage(page = 1, query = "") {
 }
 
 export async function getPersonById(id: number) {
-  const response = await apiClient.get(
-    `https://sw-api.starnavi.io/people/${id}/`
-  );
-
-  return response.data as Person;
+  return getApiResponse<Person>(`https://sw-api.starnavi.io/people/${id}/`);
 }
 
 export async function getFilmsOfPerson(person: Person) {
-  const response = await apiClient.get(
+  const response = await getApiResponse<{ results: Film[] }>(
     `https://sw-api.starnavi.io/films/?id__in=${person.films.join(",")}`
   );
 
-  return response.data.results as Film[];
+  return response.results;
 }
 
 // returns list of starships, that certain person have used in certain film
@@ -42,9 +38,9 @@ export async function getStarshipsOfPersonInFilm(
   personId: number,
   filmId: number
 ) {
-  const response = await apiClient.get(
+  const response = await getApiResponse<{ results: Starship[] }>(
     `https://sw-api.starnavi.io/starships/?pilots=${personId}&films=${filmId}`
   );
 
-  return response.data.results as Starship[];
+  return response.results;
 }
